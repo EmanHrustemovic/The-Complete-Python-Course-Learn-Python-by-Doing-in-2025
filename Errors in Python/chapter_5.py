@@ -21,11 +21,21 @@ class Garage :
         self.cars.append(car)
 
 ford = Garage()
-ford.add_car('Fiesta')
+fiesta = Car('Ford','Fiesta')
+
+'''
 print(len(ford))
 car = Car('Ford','Fiesta')
 ford.add_car(car)
+'''
+ford.add_car(fiesta)
+try:
+    ford.add_car('Fiesta')
+except TypeError :
+    print("Your car is not a Car")
+except ValueError :
+    print("Something weird happened")
+finally:
+    print(f"The Garage now have a length {len(ford)} cars !!")
 
-
-#CREATING OUR OWN ERROR :
-
+    
