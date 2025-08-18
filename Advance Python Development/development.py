@@ -1,4 +1,5 @@
 '''Mutability in Python'''
+from logging import DEBUG
 
 friends_last_seen = {
     'Rolf' : 31 ,
@@ -210,3 +211,70 @@ import  re
 
 email = 'jose@tecladocode.com'
 expression = '[a-z]+'
+
+matches = re.findall(expression,email)
+print(matches)
+
+name = matches[0]
+domain = f'{matches[1]}.{matches[2]}'
+
+print(name)
+print(domain)
+
+expression = '[a-z/.]+'
+name = matches[1]
+print(name)
+
+price = 'Price : $189.50'
+expression = 'Price : \$([0-9]*\.[0-9]*)'
+
+matches = re.search(expression,price)
+print(matches.group(0))
+print(matches.group(1))
+
+'''Introduction to logging in Python'''
+
+import logging
+logging.basicConfig(format='%(asctime)s %(levelname)s:%(message)s' , level=logging.DEBUG)
+#logging.basicConfig(level = logging.DEBUG)##OR DEBUGGING
+
+logger = logging.getLogger('test_logger')
+
+logger.info('This will not show up.')
+logger.warning('This will.')
+logger.debug('This is a debug message.')
+logger.critical('This is critical !!')
+
+'''Higher-order functions in Python'''
+
+def greet():
+    print("Hello")
+
+def before_and_after(func) :
+    print("Before ....")
+    func()
+    print("After ..")
+
+# before_and_after(5) - error since must be a function
+before_and_after(greet)
+
+movies = [
+    {"name" : "The Matrix" , "director" : "Wachowski"},
+    {"name" : "A beautiful day in the neighborhood", "director" : "Heller"},
+    {"name" : "The Irishman" , "director" : "Scorceses"},
+    {"name" : "Klaus" , "director" : "Pablos"},
+    {"name" : "1917" , "director" : "Mendes"}
+]
+
+def find_movie(expected,finder):
+    for movie in movies:
+        # print(finder(movie))
+        found = []
+        if finder(movie) == expected:
+            found.append(movie)
+
+find_by = input("What property we are searching by? :")
+looking_for = input("What are you looking for ? : ")
+
+movie = find_movie(looking_for, lambda movie : movie[find_by])
+print(movie or "No movie found.")
