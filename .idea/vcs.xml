@@ -6,5 +6,6 @@
     <mapping directory="$PROJECT_DIR$/Book Scraper App With Asynchronous Python Development" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Browser Automation With Selenium/Quote Scraping Project Updated With Selenium" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Quote Scraping Project" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Web Development With Flask" vcs="Git" />
   </component>
 </project>
