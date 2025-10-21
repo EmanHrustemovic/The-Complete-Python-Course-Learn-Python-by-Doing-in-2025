@@ -22,7 +22,6 @@ def post(post_id):
         return render_template('404.jinja2', message =f'A post with id {post_id} was not found.')
     return render_template('post.jinja2',post=post)
 
-
 @app.route('/post/create', methods=['GET','POST'])
 def create():
     if request.method == 'POST':
