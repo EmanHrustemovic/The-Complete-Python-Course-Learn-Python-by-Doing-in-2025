@@ -1,3 +1,5 @@
+import functools
+
 import  requests
 
 class OpenExchangeClient:
@@ -8,6 +10,7 @@ class OpenExchangeClient:
 
 
     @property
+    @functools.lru_cache(maxsize=2)
     def latest(self):
         return requests.get(f"{self.BASE_URL}/latest.json?app_id={self.app_id}").json()
 
