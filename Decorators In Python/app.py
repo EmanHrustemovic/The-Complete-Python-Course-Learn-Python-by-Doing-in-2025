@@ -1,14 +1,21 @@
+import functools
+
 user = {'username' : 'jose123', 'access_level' : 'admin'}
 
 def user_has_permission(func):
-    def secure_func():
+    @functools.wraps(func)
+    def secure_func(panel):
         if user.get('access_level') == 'admin':
-            return func
-    return secure_func()
+            return func(panel)
+    return secure_func
 
-def my_function():
-    return 'Password for admin panel is 1234.'
+@user_has_permission
+def my_function(panel):
+    """
+    Allows us to retrieve the password for admin panel.
+    """
+    return f'Password for {panel}  panel is 1234.'
 
-my_secure_function = user_has_permission(my_function)
-
-print(my_secure_function())
+print(my_function('movies'))
+print(my_function.__name__)
+#print(my_function.__doc__) using this to show comments/documentation we made
