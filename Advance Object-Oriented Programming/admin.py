@@ -1,7 +1,7 @@
 from user import User
-from database import Database
+from saveable import Saveable
 
-class Admin(User):
+class Admin(User,Saveable):
     def __init__(self,username,password,access):
         super(Admin,self).__init__(username,password)
         self.access = access
@@ -15,6 +15,3 @@ class Admin(User):
             'password' : self.password,
             'access' : self.access
         }
-
-    def save(self):
-        Database.insert(self.to_dict())
