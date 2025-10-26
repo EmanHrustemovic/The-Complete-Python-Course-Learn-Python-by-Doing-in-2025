@@ -1,6 +1,5 @@
-
 class Database:
-    content = {'user' : []}
+    content = {'users' : []}
 
     @classmethod
     def insert(cls,data):
@@ -13,4 +12,3 @@ class Database:
     @classmethod
     def find(cls,finder):
         return [user for user in cls.content['users'] if finder(user)]
-

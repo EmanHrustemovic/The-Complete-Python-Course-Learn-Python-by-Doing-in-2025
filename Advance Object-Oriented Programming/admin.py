@@ -1,5 +1,5 @@
 from user import User
-
+from database import Database
 
 class Admin(User):
     def __init__(self,username,password,access):
@@ -15,3 +15,6 @@ class Admin(User):
             'password' : self.password,
             'access' : self.access
         }
+
+    def save(self):
+        Database.insert(self.to_dict())
