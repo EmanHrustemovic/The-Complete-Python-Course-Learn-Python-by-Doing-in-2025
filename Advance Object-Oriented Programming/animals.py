@@ -26,5 +26,10 @@ class Monkey(Animal):
         return 2
 
 
-a = Animal()
-print(a.num_legs())
+''' 
+d = Dog('Rolf')
+print(d.num_legs())
+'''
+animals = [Dog('Rolf'),Monkey('Bob')]
+for a in animals:
+    print(a.num_legs())
