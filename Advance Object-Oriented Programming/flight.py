@@ -14,6 +14,11 @@ class Flight:
         """
         :return: string in format of GLA -> LHR -> EDI
         """
+        stops = [self.segments[0].departure, self.segments[0].destination]
+        for seg in self.segments[1:]:
+            stops.append(seg.destination)
+
+        return ' -> '.join(stops)
 
 
     @property
@@ -27,7 +32,7 @@ class Flight:
         self.segments[0] = Segment(departure=val,destination=dest)
 
 flight = Flight([Segment('GLA','LHR')])
+print(flight)
 
-print(flight.departure_point)
 flight.departure_point = 'EDI'
-print(flight.departure_point)
+print(flight)
