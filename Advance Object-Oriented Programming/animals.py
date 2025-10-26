@@ -32,4 +32,5 @@ print(d.num_legs())
 '''
 animals = [Dog('Rolf'),Monkey('Bob')]
 for a in animals:
+    print(isinstance(a,Animal))
     print(a.num_legs())
