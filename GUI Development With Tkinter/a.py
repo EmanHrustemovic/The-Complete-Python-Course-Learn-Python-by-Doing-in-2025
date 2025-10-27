@@ -3,12 +3,20 @@ import tkinter
 tkinter.test()
 """
 import tkinter as tk
+from tkinter import ttk
+
+def greet():
+    print('Hello world in Tkinter !!')
 
 root = tk.Tk()
-root.title("Moj prvi Tkinter prozor")
-root.geometry("300x200")
+root.title('Hello')
 
-label = tk.Label(root, text="Tkinter is working!")
-label.pack(pady=20)
+greet_buton = ttk.Button(root,text="Greet",command=greet)
+greet_buton.pack(side="left",fill="x",expand=True)
+
+quit_button = ttk.Button(root,text="Quit",command=root.destroy)
+quit_button.pack(side="left",fill="x",expand=True)
 
 root.mainloop()
+
+greet()
