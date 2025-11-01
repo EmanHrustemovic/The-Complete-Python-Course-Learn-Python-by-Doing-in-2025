@@ -3,10 +3,11 @@ import tkinter as tk
 from tkinter import ttk, filedialog
 
 
-def create_file():
+def create_file(content="",title="Untitled"):
     text_area = tk.Text(notebook)
+    text_area.insert("end",content)
     text_area.pack(fill="both", expand=True)
-    notebook.add(text_area, text="Untitled")
+    notebook.add(text_area, text=title)
     notebook.select(text_area)
 
 def save_file():
@@ -25,6 +26,21 @@ def save_file():
         return
 
     notebook.tab("current",text=filename)
+
+def open_file():
+    file_path = filedialog.asksaveasfilename()
+
+    try:
+        filename = os.path.basename(file_path)
+
+        with open(file_path, "r") as file:
+            content = file.read()
+
+    except (AttributeError,FileNotFoundError):
+        print("Open operation canceled")
+        return
+
+    create_file(content, filename)
 
 root = tk.Tk()
 root.title("Text Editor App")
