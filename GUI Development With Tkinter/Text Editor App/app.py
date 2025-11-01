@@ -9,10 +9,19 @@ def create_file():
     notebook.select(text_area)
 
 root = tk.Tk()
+root.title("Text Editor App")
+root.option_add("*tearOff",False)
 
 main = tk.Frame(root)
 main.pack(fill="both", expand=True, padx=1, pady=(4,0) )
 
+menubar =tk.Menu()
+root.config(menu=menubar)
+
+file_menu = tk.Menu(menubar)
+menubar.add_cascade(menu=file_menu, label="File")
+
+file_menu.add_command(label="New",command=create_file)
 
 notebook = ttk.Notebook()
 notebook.pack(fill="both", expand=True)
