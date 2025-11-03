@@ -6,4 +6,5 @@ class TestFunctions(TestCase):
         dividend = 15
         divisor = 3
         expected_result = 5.0
+        self.assertEqual(divide(dividend,divisor),expected_result)
 
