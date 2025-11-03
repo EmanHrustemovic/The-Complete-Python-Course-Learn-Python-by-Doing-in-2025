@@ -5,13 +5,21 @@ from tkinter import ttk, filedialog,messagebox
 text_contents = dict()
 
 def create_file(content="",title="Untitled"):
+    container = ttk.Frame(notebook)
+    container.pack()
+
     text_area = tk.Text(notebook)
     text_area.insert("end",content)
-    text_area.pack(fill="both", expand=True)
-    notebook.add(text_area, text=title)
-    notebook.select(text_area)
+    text_area.pack(side="left",fill="both", expand=True)
+
+    notebook.add(container, text=title)
+    notebook.select(container)
 
     text_contents[str(text_area)] = hash(content)
+
+    text_scroll = ttk.Scrollbar(container,orient="vertical",command=text_area.yview)
+    text_scroll.pack(side="right",fill="y")
+    text_area["yscrollcommand"] = text_scroll.set
 
 def check_for_changes():
     current = get_text_widget()
@@ -27,7 +35,8 @@ def check_for_changes():
 
 
 def get_text_widget():
-    text_widget = root.nametowidget(notebook.select())
+    tab_widget = root.nametowidget(notebook.select())
+    text_widget = tab_widget.winfo_children()[0]
     return text_widget
 
 
@@ -58,7 +67,8 @@ def confirm_quit():
     unsaved = False
 
     for tab in notebook.tabs():
-        text_widget = root.nametowidget(tab)
+        tab_widget = root.nametowidget(tab)
+        text_widget = tab_widget.winfo_children()[0]
         content = text_widget.get("1.0","end-1c")
 
         if hash(content) != text_contents[str(text_widget)]:
