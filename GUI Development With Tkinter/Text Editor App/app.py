@@ -33,10 +33,26 @@ def get_text_widget():
 
 def close_current_tab():
     current = get_text_widget()
+    if current_tab_unsaved() and not confirm_close():
+        return
+
+    if len(notebook.tabs()) == 1:
+        create_file()
+
     notebook.forget(current)
 
+def current_tab_unsaved():
+    text_widget = get_text_widget()
+    content = text_widget.get("1.0","end-1c")
+    return hash(content) != text_contents[str(text_widget)]
 
 
+def confirm_close():
+    return messagebox.askyesno(
+        message="You have unsaved changes. Are you sure you want to close?",
+        icon="question",
+        title="Unsaved Changes"
+    )
 
 def confirm_quit():
     unsaved = False
@@ -49,15 +65,8 @@ def confirm_quit():
             unsaved = True
             break
 
-    if unsaved:
-        confirm = messagebox.askyesno(
-            message= "You have unsaved changes. Are you sure you want to quit?",
-            icon="question",
-            title="Confirm Quit"
-        )
-
-        if not confirm:
-            return
+    if unsaved and not confirm_close():
+        return
 
     root.destroy()
 
