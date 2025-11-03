@@ -8,7 +8,7 @@ def create_file(content="",title="Untitled"):
     container = ttk.Frame(notebook)
     container.pack()
 
-    text_area = tk.Text(notebook)
+    text_area = tk.Text(container)
     text_area.insert("end",content)
     text_area.pack(side="left",fill="both", expand=True)
 
