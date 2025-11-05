@@ -43,3 +43,47 @@ class BinaryTree:
         self._inorder_recursive(current_node.left)
         print(current_node)
         self._inorder_recursive(current_node.right)
+
+
+    def find_parent(self, value: int) -> Node:
+        if self.head and self.head.value == value:
+            return self.head
+
+        current_node = self.head
+        while current_node:
+            if (current_node.left and current_node.left.value == value) or\
+                    (current_node.right and current_node.right.value == value):
+                return current_node
+            elif value > current_node.value:
+                current_node = current_node.right
+            elif value < current_node.value:
+                current_node = current_node.left
+
+
+    def find_rightmost(self, node : Node) -> Node:
+        current_node = node
+        while current_node.right:
+            current_node = current_node.right
+        return current_node
+
+    def delete(self, value: int):
+        to_delete = self.find(value)
+        to_delete_parent = self.find_parent(value)
+
+        if to_delete.left and to_delete.right:
+            # We have 2 children
+            pass
+        elif to_delete.left or to_delete.right:
+            if to_delete == to_delete_parent.left:
+                to_delete_parent.left = to_delete.right or to_delete.left
+            elif to_delete == to_delete_parent.right:
+                to_delete_parent.right = to_delete.right or to_delete.left
+            else:
+                self.head = to_delete.right or to_delete.left
+        else:
+            if to_delete == to_delete_parent.left:
+                to_delete_parent.left = None
+            elif to_delete == to_delete_parent.right:
+                to_delete_parent.right = None
+            else:
+                self.head = None
