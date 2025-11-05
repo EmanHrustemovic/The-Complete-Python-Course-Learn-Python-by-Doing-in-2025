@@ -74,6 +74,8 @@ class BinaryTree:
             rightmost = self.find_rightmost(to_delete.left)
             rightmost_parent = self.find_parent(rightmost.value)
             if to_delete == to_delete_parent.left:
+                rightmost_parent.right = rightmost.left
+                rightmost.left = to_delete.left
                 rightmost.right = to_delete.right
                 to_delete_parent.left = rightmost
             elif to_delete == to_delete_parent.right:
@@ -82,6 +84,8 @@ class BinaryTree:
                 rightmost.right = to_delete.right
                 to_delete_parent.right = rightmost
             else:
+                rightmost_parent.right = rightmost.left
+                rightmost.left = to_delete.left
                 rightmost.right = to_delete.right
                 self.head = rightmost
         elif to_delete.left or to_delete.right:
